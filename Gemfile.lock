@@ -227,8 +227,5 @@ DEPENDENCIES
   spring
   tzinfo-data
 
-RUBY VERSION
-   ruby 3.0.1p64
-
 BUNDLED WITH
    2.4.6
