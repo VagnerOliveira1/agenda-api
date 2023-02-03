@@ -113,5 +113,27 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
+
+  end
+
+  context "DELETE /contacts/:id" do
+    let!(:contact) { create(:contact) }
+    let(:url) { "/admin/v1/contacts/#{contact.id}" }
+
+    it 'removes Contact' do
+      expect do  
+        delete url, headers: auth_header(user)
+      end.to change(Contact, :count).by(-1)
+    end
+  
+    it 'returns success status' do
+      delete url, headers: auth_header(user)
+      expect(response).to have_http_status(:no_content)
+    end
+  
+    it 'does not return any body content' do
+      delete url, headers: auth_header(user)
+      expect(body_json).to_not be_present
+    end
   end
 end
