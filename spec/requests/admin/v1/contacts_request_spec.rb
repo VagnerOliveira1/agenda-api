@@ -63,4 +63,55 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
       end
     end
   end
+
+  context "PATCH /contacts/:id" do
+    let(:contact) { create(:contact) }
+    let(:url) { "/admin/v1/contacts/#{contact.id}" }
+
+    context "with valid params" do
+      let(:new_name) { 'My new Contact' }
+      let(:contact_params) { { contact: { full_name: new_name } }.to_json }
+
+      it 'updates Contact' do
+        patch url, headers: auth_header(user), params: contact_params
+        contact.reload
+        expect(contact.full_name).to eq new_name
+      end
+
+      it 'returns updated Contact' do
+        patch url, headers: auth_header(user), params: contact_params
+        contact.reload
+        expected_contact = contact.as_json(only: %i(id full_name))
+        expect(body_json['contact']).to eq expected_contact
+      end
+
+      it 'returns success status' do
+        patch url, headers: auth_header(user), params: contact_params
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  
+    context "with invalid params" do
+      let(:contact_invalid_params) do 
+        { contact: attributes_for(:contact, full_name: nil) }.to_json
+      end
+
+      it 'does not update Contact' do
+        old_name = contact.full_name
+        patch url, headers: auth_header(user), params: contact_invalid_params
+        contact.reload
+        expect(contact.full_name).to eq old_name
+      end
+
+      it 'returns error message' do
+        patch url, headers: auth_header(user), params: contact_invalid_params
+        expect(body_json['errors']['fields']).to have_key('full_name')
+      end
+
+      it 'returns unprocessable_entity status' do
+        patch url, headers: auth_header(user), params: contact_invalid_params
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
 end
