@@ -1,0 +1,5 @@
+pt-BR: 
+  activerecord:
+    errors:
+      messages:
+        valid_date: "Deve ser uma data valida" 
