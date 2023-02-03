@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   validates :name, presence: true
+  validates :profile, presence: true
+
+  enum profile: { admin: 0, manager: 1 }
 end
