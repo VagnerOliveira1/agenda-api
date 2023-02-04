@@ -1,6 +1,7 @@
 class Contact < ApplicationRecord
-  has_many :address
-  has_many :phone
+  has_many :addresses
+  has_many :phones
+  accepts_nested_attributes_for :phones, :allow_destroy => true
   validates :full_name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :cpf, presence: true, uniqueness: true

@@ -7,6 +7,6 @@ RSpec.describe Contact, type: :model do
   it { is_expected.to validate_presence_of(:cpf)}
   it { is_expected.to validate_uniqueness_of(:cpf)}
   it { is_expected.to validate_presence_of(:birth_date)}
-  it { is_expected.to have_many(:address)}
-  it { is_expected.to have_many(:phone)}
+  it { is_expected.to have_many(:addresses)}
+  it { is_expected.to have_many(:phones)}
 end
