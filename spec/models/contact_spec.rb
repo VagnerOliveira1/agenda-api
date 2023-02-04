@@ -9,4 +9,6 @@ RSpec.describe Contact, type: :model do
   it { is_expected.to validate_presence_of(:birth_date)}
   it { is_expected.to have_many(:addresses)}
   it { is_expected.to have_many(:phones)}
+
+  it_behaves_like "name searchable concern", :contact
 end
