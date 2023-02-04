@@ -11,4 +11,5 @@ RSpec.describe Contact, type: :model do
   it { is_expected.to have_many(:phones)}
 
   it_behaves_like "name searchable concern", :contact
+  it_behaves_like "paginatable concern", :contact
 end
