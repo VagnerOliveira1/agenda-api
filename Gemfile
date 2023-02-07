@@ -22,6 +22,9 @@ gem 'jbuilder', '~> 2.10.1'
 # Task
 gem 'tty-spinner'
 
+#Search
+gem "searchkick"
+gem 'elasticsearch', '~> 7.14', '>= 7.14.1'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
