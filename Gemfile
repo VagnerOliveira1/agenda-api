@@ -10,13 +10,17 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 
 # Auth
-gem 'devise_token_auth', '~> 1.1.4'
+#gem 'devise_token_auth', '~> 1.1.4'
+gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth', branch: 'master'
 
 # Cors
 gem 'rack-cors', '1.1.1'
 
 # Render
 gem 'jbuilder', '~> 2.10.1'
+
+# Task
+gem 'tty-spinner'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -38,7 +38,7 @@ module Admin::V1
 
     def contact_params
       return {} unless params.has_key?(:contact)
-      params.require(:contact).permit(:full_name, :email, :cpf, :birth_date, :phones_attributes => [:id, :phone_number, :whatsapp])
+      params.require(:contact).permit(:full_name, :email, :cpf, :birth_date, :phones_attributes => [:id, :phone_number, :kind])
     end
 
     def save_contact!
