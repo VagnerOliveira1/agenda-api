@@ -9,6 +9,7 @@ module Admin::V1
       @contact = Contact.new
       @contact.attributes = contact_params
       save_contact!
+      SendNotificationJob.perform_later(@contact.id)
     end
 
     def update

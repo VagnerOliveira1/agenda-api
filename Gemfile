@@ -25,6 +25,12 @@ gem 'tty-spinner'
 #Search
 gem "searchkick"
 gem 'elasticsearch', '~> 7.14', '>= 7.14.1'
+
+#Job
+gem 'httparty', '~> 0.21.0'
+gem 'sidekiq'
+
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
