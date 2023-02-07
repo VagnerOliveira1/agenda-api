@@ -1,6 +1,5 @@
 class Contact < ApplicationRecord
   searchkick
-  
   include NameSearchable
   include Paginatable
   has_many :addresses

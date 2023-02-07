@@ -16,9 +16,8 @@ module Admin::V1
       @contact.attributes = contact_params
       save_contact!
     end
-    def show;
-    end
-    
+    def show;end 
+
     def destroy
       @contact = Contact.find(params[:id])
       @contact.destroy!

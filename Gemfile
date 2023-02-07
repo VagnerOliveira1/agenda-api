@@ -37,6 +37,7 @@ end
 
 group :development do
   gem 'listen', '~> 3.3'
+  gem 'rails_best_practices', '~> 1.23', '>= 1.23.2', require: false
   gem 'spring'
 end
 
