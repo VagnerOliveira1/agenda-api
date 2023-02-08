@@ -1,16 +1,16 @@
 shared_examples "paginatable concern" do |factory_name|
   context "when records fits page size" do
-    let!(:records) { create_list(factory_name, 20) }
+    let!(:records) { create_list(factory_name, 30) }
 
     context "when :page and :length are empty" do
-      it "returns default 10 records" do
+      it "returns default 20 records" do
         paginated_records = described_class.paginate(nil, nil)
-        expect(paginated_records.count).to eq 10
+        expect(paginated_records.count).to eq 20
       end
 
-      it "matches first 10 records" do
+      it "matches first 20 records" do
         paginated_records = described_class.paginate(nil, nil)
-        expected_records = described_class.all[0..9]
+        expected_records = described_class.all[0..19]
         expect(paginated_records).to eq expected_records
       end
     end
@@ -20,13 +20,14 @@ shared_examples "paginatable concern" do |factory_name|
       
       it "returns default 10 records" do
         paginated_records = described_class.paginate(page, nil)
+
         expect(paginated_records.count).to eq 10
       end
 
-      it "returns 10 records from right page" do
+      it "returns 20 records from right page" do
         paginated_records = described_class.paginate(page, nil)
-        first_record_index = 10
-        last_record_index = 19
+        first_record_index = 20
+        last_record_index = 39
         expected_records = described_class.all[first_record_index..last_record_index]
         expect(paginated_records).to eq expected_records
       end
@@ -34,7 +35,7 @@ shared_examples "paginatable concern" do |factory_name|
 
     context "when :page and :length are fulfilled and fits records size" do
       let(:page) { 2 }
-      let(:length) { 5 }
+      let(:length) { 10 }
       
       it "returns right quantity of records" do
         paginated_records = described_class.paginate(page, length)
@@ -43,8 +44,8 @@ shared_examples "paginatable concern" do |factory_name|
 
       it "returns records from right page" do
         paginated_records = described_class.paginate(page, length)
-        first_record_index = 5
-        last_record_index = 9
+        first_record_index = 10
+        last_record_index = 19
         expected_records = described_class.all[first_record_index..last_record_index]
         expect(paginated_records).to eq expected_records
       end

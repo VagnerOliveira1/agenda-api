@@ -1,9 +1,8 @@
 module Paginatable
   extend ActiveSupport::Concern
 
-  MAX_PER_PAGE = 10
+  MAX_PER_PAGE = 20
   DEFAULT_PAGE = 1
-
 
   included do
     scope :paginate, -> (page, length) do

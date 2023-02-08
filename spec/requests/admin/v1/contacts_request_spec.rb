@@ -5,17 +5,17 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
 
   context "GET /contacts" do
     let(:url) { "/admin/v1/contacts" }
-    let!(:contacts) { create_list(:contact, 10) }
+    let!(:contacts) { create_list(:contact, 20) }
     
     context "without any params" do
-      it "returns 10 Contatcs" do
+      it "returns 20 Contatcs" do
         get url, headers: auth_header(user)
-        expect(body_json['contacts'].count).to eq 10
+        expect(body_json['contacts'].count).to eq 20
       end
       
-      it "returns 10 first Contatcs" do
+      it "returns 20 first Contatcs" do
         get url, headers: auth_header(user)
-        expected_contacts = contacts[0..9].as_json(only: %i(id full_name email))
+        expected_contacts = contacts[0..19].as_json(only: %i(id full_name email))
         expect(body_json['contacts']).to match_array expected_contacts
       end
 
@@ -36,7 +36,7 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
 
       it "returns only seached contacts limited by default pagination" do   #{}// Voltar para resolver esse teste
         get url, headers: auth_header(user), params: search_params          
-        expected_contacts = search_name_contacts[0..9].map do |contact|
+        expected_contacts = search_name_contacts[0..19].map do |contact|
           contact.as_json(only: %i(id full_name email))
         end
         expect(body_json['contacts']).to contain_exactly *expected_contacts
@@ -50,7 +50,7 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
 
     context "with pagination params" do
       let(:page) { 2 }
-      let(:length) { 5 }
+      let(:length) { 10 }
 
       let(:pagination_params) { { page: page, length: length } }
 
@@ -61,7 +61,7 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
       
       it "returns contacts limited by pagination" do
         get url, headers: auth_header(user), params: pagination_params
-        expected_contacts = contacts[5..9].as_json(only: %i(id full_name email))
+        expected_contacts = contacts[10..19].as_json(only: %i(id full_name email))
         expect(body_json['contacts']).to contain_exactly *expected_contacts
       end
 
@@ -77,7 +77,7 @@ RSpec.describe "Admin::V1::Contacts", type: :request do
       it "returns ordered contacts limited by default pagination" do
         get url, headers: auth_header(user), params: order_params
         contacts.sort! { |a, b| b[:full_name] <=> a[:full_name]}
-        expected_contacts = contacts[0..9].as_json(only: %i(id full_name email))
+        expected_contacts = contacts[0..19].as_json(only: %i(id full_name email))
         expect(body_json['contacts']).to match_array expected_contacts
       end
  
