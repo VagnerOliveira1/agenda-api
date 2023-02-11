@@ -19,7 +19,7 @@ namespace :dev do
 
   desc "Add Admins"
   task add_admins: :environment do
-    10.times do |i|
+    20.times do |i|
       User.create!(
         name: Faker::Name.name,
         email: Faker::Internet.email,
@@ -32,7 +32,7 @@ namespace :dev do
 
   desc "Add Contacts"
   task add_contact: :environment do
-    10.times do |i|
+    50.times do |i|
       Contact.create!(
         full_name: Faker::Name.name, 
         email: Faker::Internet.email, 
