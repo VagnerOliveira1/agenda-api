@@ -7,7 +7,8 @@ module Admin::V1
 
     def create
       @contact = Contact.new
-      @contact.attributes = contact_params
+      @contact.attributes = contact_params  
+      add_phones
       save_contact!
       SendNotificationJob.perform_later(@contact.id)
     end
@@ -38,7 +39,7 @@ module Admin::V1
 
     def contact_params
       return {} unless params.has_key?(:contact)
-      params.require(:contact).permit(:full_name, :email, :cpf, :birth_date, :phones_attributes => [:id, :phone_number, :kind])
+      params.require(:contact).permit(:full_name, :email, :cpf, :birth_date, phones_attibutes: %i(phone_number kind))
     end
 
     def save_contact!
@@ -47,5 +48,12 @@ module Admin::V1
     rescue
       render_error(fields: @contact.errors.messages)
     end
+
+    def add_phones
+      params[:contact][:phones].each do |phone_params|
+        @contact.phones.build(phone_number: phone_params[:phone_number], kind: phone_params[:kind].to_i)
+      end
+    end
+    
   end
 end
