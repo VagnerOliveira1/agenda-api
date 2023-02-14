@@ -33,12 +33,13 @@ gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'cpf_faker', '~> 1.0'
+  gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 4.0'
-  gem 'cpf_faker', '~> 1.0'
 end
 
 group :development do

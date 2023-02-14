@@ -19,6 +19,8 @@ namespace :dev do
 
   desc "Add Admins"
   task add_admins: :environment do
+    User.create!(name: "Admin", email:"admin@admin.com",
+      password: DEFAULT_PASSWORD, password_confirmation: DEFAULT_PASSWORD, profile: :admin)
     20.times do |i|
       User.create!(
         name: Faker::Name.name,
