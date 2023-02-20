@@ -5,16 +5,16 @@ namespace :dev do
 
   desc "Config  de desenvolvimento"
   task setup: :environment do
-    #{}if Rails.env.development?
+    if Rails.env.development?
       show_spinner("Drop DB...") { %x(rails db:drop) }
       show_spinner("Creating DB...") { %x(rails db:create) }
       show_spinner("Migrating DB...") { %x(rails db:migrate) }
       show_spinner("Creating Admins...") { %x(rails dev:add_admins) }
       show_spinner("Creating Contacts...") { %x(rails dev:add_contact) }
       show_spinner("Creating Addresses...") { %x(rails dev:add_address) }
-    #{}else
-      #{}puts "You are not in a development environment!"
-    #{}end
+    else
+      puts "You are not in a development environment!"
+    end
   end
 
   desc "Add Admins"
