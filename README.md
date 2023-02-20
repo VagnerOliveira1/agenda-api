@@ -34,7 +34,7 @@ paginação, busca de uma forma que pode ser reutilizada.
 
 ## 📦 Implantação
 
-o back-end da aplicação foi hospedada no heroku <br>e o endreço é: https://pure-retreat-95713.herokuapp.com/
+o back-end da aplicação foi hospedada no heroku <br>e o endreço é: https://infinite-beach-09577.herokuapp.com/
 
 ## 🛠️ Em construção
 * Listagem dos usuarios admins e Manager
